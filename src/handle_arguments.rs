@@ -1,19 +1,10 @@
 use std::{sync::Arc};
 use std::process::exit;
 use termcolor::{Color, StandardStream, ColorChoice, ColorSpec, WriteColor};
-use crate::{helpers::{self, reset_terminal_color}, program_colors};
+use crate::{helpers::{reset_terminal_color}, program_colors, structs::{ProgramArguments,HandledProgramArguments}};
 
 
-pub struct HandledProgramArguments{
-    pub max_string_size : Arc<i16>,
-    pub min_string_size : Arc<i16>,
-    pub foreground_color_pointer : Arc<Option<Color>>,
-    pub background_color_pointer : Arc<Option<Color>>,
-    pub matrix_redraw_cooldown : Arc<u64>,
-    pub matrix_string_generator_cooldown : Arc<u64>
-}
-
-pub fn handle_cli_arguments(program_arguments : helpers::ProgramArguments) -> Arc<HandledProgramArguments>{
+pub fn handle_cli_arguments(program_arguments : ProgramArguments) -> Arc<HandledProgramArguments>{
     let foreground_color_pointer : Arc<Option<Color>>;
     let background_color_pointer : Arc<Option<Color>>;
     let mut max_string_size : Arc<i16> = Arc::new(12);

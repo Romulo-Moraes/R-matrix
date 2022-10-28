@@ -4,7 +4,7 @@ use termcolor::{
     ColorSpec, Color, StandardStream, WriteColor
 };
 
-use crate::handle_arguments::HandledProgramArguments;
+use crate::structs::HandledProgramArguments;
 
 
 pub fn set_output_color_if_necessary(handled_program_arguments : Arc<HandledProgramArguments>, program_output : &mut StandardStream){

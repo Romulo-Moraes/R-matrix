@@ -7,8 +7,9 @@ use std::rc::Rc;
 use std::sync::{Mutex, MutexGuard};
 use std::{sync::Arc, thread, time::Duration};
 
-use crate::handle_arguments::HandledProgramArguments;
-use crate::helpers::{generate_random_number, print_matrix, TerminalSize, self, allocate_empty_locations_flag, allocate_remaining_chars_of_positions, allocate_matrix};
+use crate::structs::{HandledProgramArguments};
+use crate::structs::TerminalSize;
+use crate::helpers::{generate_random_number, print_matrix, self, allocate_empty_locations_flag, allocate_remaining_chars_of_positions, allocate_matrix};
 
 
 

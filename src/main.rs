@@ -4,15 +4,16 @@ mod program_configurations;
 mod helpers;
 mod controllers;
 mod program_colors;
+mod structs;
 
 // Libs
 use std::cell::{RefCell};
 use std::rc::Rc;
 use std::thread;
-use handle_arguments::HandledProgramArguments;
+use clap::Parser;
+use structs::HandledProgramArguments;
 use termcolor::{StandardStream, ColorChoice};
 use std::sync::{Arc, Mutex};
-use clap::Parser;
 use controllers::matrix_renderer;
 use crossterm::{
     cursor::{Hide}, ExecutableCommand
@@ -26,10 +27,10 @@ fn main(){
     ];
     let mut program_stdout = StandardStream::stdout(ColorChoice::Always);
     let matrix : Arc<Mutex<Vec<Vec<char>>>>;
-    let term_size : Rc<RefCell<helpers::TerminalSize>>;
+    let term_size : Rc<RefCell<structs::TerminalSize>>;
     let remaining_chars_of_columns_clone  : Arc<Mutex<Vec<i16>>>;
     let empty_positions_flags : Arc<Mutex<Vec<bool>>>;
-    let program_arguments : helpers::ProgramArguments;
+    let program_arguments : structs::ProgramArguments;
     let handled_program_arguments : Arc<HandledProgramArguments>;
     let handled_program_arguments_clone : Arc<HandledProgramArguments>;
 
@@ -39,7 +40,7 @@ fn main(){
     let empty_positions_flags_clone : Arc<Mutex<Vec<bool>>>;
 
     // Parsing arguments with clap lib
-    program_arguments = helpers::ProgramArguments::parse();
+    program_arguments = structs::ProgramArguments::parse();
     // All necessary arguments are now inside of Arc<HandledProgramArguments> variable
     handled_program_arguments = handle_arguments::handle_cli_arguments(program_arguments);
 
