@@ -324,7 +324,6 @@ dependencies = [
  "clap",
  "crossterm",
  "rand",
- "signal-hook",
  "termcolor",
  "terminal_size",
 ]

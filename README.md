@@ -78,4 +78,7 @@ This program uses another thread to generate strings randomly in terminal screen
 --matrix_string_generator_cooldown or -s <MATRIX_STRING_GENERATOR_COOLDOWN>
 ```
 
+### Using it as inactivity background
+Exists some ways to stop the program, the most common is just hitting ctrl + c, however, this won't clear the terminal and reset all colors (if changed by program call). The better way is just hitting enter when focusing the terminal, this will show your cursor back, clear the terminal and reset all colors.
+
 ## Goodbye

@@ -3,6 +3,8 @@ use rand::{self, Rng};
 use termcolor::{StandardStream, ColorChoice, WriteColor};
 use terminal_size::{Width, Height, terminal_size};
 use crate::{structs::TerminalSize};
+use std::env::consts;
+use std::process::Command;
 
 
 pub fn allocate_matrix(matrix_columns : u16, matrix_lines : u16) -> Vec<Vec<char>>{
@@ -15,6 +17,15 @@ pub fn allocate_empty_locations_flag(matrix_width : u16) -> Vec<bool>{
 
 pub fn allocate_remaining_chars_of_positions(matrix_width : u16) -> Vec<i16>{
     return vec![0; matrix_width as usize];
+}
+
+pub fn clear_terminal(){
+    if consts::OS == "windows" {
+        Command::new("cmd").args(["/C", "cls"]).status().unwrap();
+    }
+    else{
+        Command::new("clear").status().unwrap();
+    }
 }
 
 pub fn print_matrix(matrix: Vec<Vec<char>>) {

@@ -1,23 +1,22 @@
-use signal_hook::{iterator::Signals, consts::{SIGINT, SIGABRT, SIGQUIT}};
-use termcolor::{StandardStream, ColorChoice};
+//use termcolor::{StandardStream, ColorChoice};
+//use std::borrow::BorrowMut;
+//use std::collections::binary_heap::DrainSorted;
+use std::sync::{Arc, Mutex, MutexGuard};
 use std::{thread};
-use std::process::{Command, exit};
-use crossterm::{
-    cursor::Show, ExecutableCommand
-};
+//use std::process::{Command, exit};
+use std::io::{stdin, Stdin};
 
-use crate::helpers::reset_terminal_color;
-
-pub fn set_signals_handling(){
-    let mut signal_handling = Signals::new(&[SIGINT, SIGABRT, SIGQUIT]).unwrap();
-    let mut program_stdout : StandardStream = StandardStream::stdout(ColorChoice::Always);
+pub fn set_thread_for_program_exit(program_alive_flag : Arc<Mutex<bool>>){
+    let program_stdin : Stdin = stdin();
+    let mut exit_trigger : String = String::new();
+    let program_alive_flag_clone : Arc<Mutex<bool>> = program_alive_flag.clone();
 
     thread::spawn(move || {
-        for _ in signal_handling.forever(){
-            Command::new("clear").status().unwrap();
-            program_stdout.execute(Show).unwrap();
-            reset_terminal_color();
-            exit(0);
-        }
+        let mut program_alive_mutex_guard : MutexGuard<bool>;
+        program_stdin.read_line(&mut exit_trigger).unwrap();
+        program_alive_mutex_guard = program_alive_flag_clone.lock().unwrap();
+        *program_alive_mutex_guard = false;
+    
+        drop(program_alive_mutex_guard);
     });
 }
