@@ -38,6 +38,7 @@ If you wan't change the background color of matrix, you could use this flag.
 These are the acceptable colors for matrix foreground/background, any color that isn't here will result in an error.
 <ul>
     <li>Black</li>
+    <li>Gray</li>
     <li>Blue</li>
     <li>Cyan</li>
     <li>Green</li>
@@ -45,6 +46,13 @@ These are the acceptable colors for matrix foreground/background, any color that
     <li>Red</li>
     <li>White</li>
     <li>Yellow</li>
+    <li>BrightBlue</li>
+    <li>BrightCyan</li>
+    <li>BrightGreen</li>
+    <li>BrightMagenta</li>
+    <li>BrightRed</li>
+    <li>BrightWhite</li>
+    <li>BrightYellow</li>
 </ul>
 
 ## Matrix string size
