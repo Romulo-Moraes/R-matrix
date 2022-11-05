@@ -2,7 +2,7 @@ use std::sync::Arc;
 use termcolor::Color;
 use clap::{Parser};
 
-const AVAILABLE_COLORS : &str = "Black\nBlue\nCyan\nGreen\nMagenta\nRed\nWhite\nYellow\n";
+const AVAILABLE_COLORS : &str = "Black\nGray\nBlue\nCyan\nGreen\nMagenta\nRed\nWhite\nYellow\nBrightBlue\nBrightCyan\nBrightGreen\nBrightMagenta\nBrightRed\nBrightWhite\nBrightYellow\n";
 pub struct TerminalSize{
     pub width : u16,
     pub height : u16
@@ -32,9 +32,9 @@ pub struct ProgramArguments{
     #[arg(short='M', long)]
     pub max_string_size : Option<i16>,
 
-    #[arg(short='r', long)]
+    #[arg(short='r', long, help="Default is 40")]
     pub matrix_redraw_cooldown : Option<u64>,
 
-    #[arg(short='s', long)]
+    #[arg(short='s', long, help="Default is 40")]
     pub matrix_string_generator_cooldown : Option<u64>
 }

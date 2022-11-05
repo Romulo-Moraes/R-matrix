@@ -9,8 +9,8 @@ pub fn handle_cli_arguments(program_arguments : ProgramArguments) -> Arc<Handled
     let background_color_pointer : Arc<Option<Color>>;
     let mut max_string_size : Arc<i16> = Arc::new(12);
     let mut min_string_size : Arc<i16> = Arc::new(8);
-    let mut matrix_redraw_cooldown : Arc<u64> = Arc::new(70);
-    let mut matrix_string_generator_cooldown : Arc<u64> = Arc::new(150);
+    let mut matrix_redraw_cooldown : Arc<u64> = Arc::new(40);
+    let mut matrix_string_generator_cooldown : Arc<u64> = Arc::new(40);
     let mut program_stdout : StandardStream = StandardStream::stdout(ColorChoice::Always);
 
     match program_arguments.matrix_redraw_cooldown {
