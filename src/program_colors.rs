@@ -53,60 +53,62 @@ pub fn set_output_color_if_necessary(handled_program_arguments : Arc<HandledProg
             }
         }
     }
-
 }
 
-pub fn check_if_color_exists(selected_color : String) -> Option<Color>{
+pub fn check_if_color_exists(selected_color : String) -> Option<(Color, bool)>{
     // Switch sequence to check if passed color exists in termcolor library
     match selected_color.as_str() {
         "Black" => {
-            return Some(Color::Rgb(0, 0, 0));
+            return Some((Color::Rgb(0, 0, 0), false));
         },
         "Gray" => {
-            return Some(Color::Black);
+            return Some((Color::Black, false));
         }
         "Blue" => { 
-            return Some(Color::Blue);
+            return Some((Color::Blue, false));
         },
         "BrightBlue" => {
-            return Some(Color::Rgb(29, 240, 211));
+            return Some((Color::Rgb(29, 240, 211), false));
         }
         ,
         "Cyan" => {
-            return Some(Color::Cyan);
+            return Some((Color::Cyan, false));
         },
         "BrightCyan" => {
-            return Some(Color::Rgb(9, 208, 239));
+            return Some((Color::Rgb(9, 208, 239), false));
         }
         "Green" => {
-            return Some(Color::Green);
+            return Some((Color::Green, false));
         },
         "BrightGreen" => {
-            return Some(Color::Rgb(102, 255, 0));
+            return Some((Color::Rgb(102, 255, 0), false));
         },
         "Magenta" => {
-            return Some(Color::Magenta);
+            return Some((Color::Magenta, false));
         },
         "BrightMagenta" => {
-            return Some(Color::Rgb(255, 0, 205));
+            return Some((Color::Rgb(255, 0, 205), false));
         },
         "Red" => {
-            return Some(Color::Red);
+            return Some((Color::Red, false));
         },
         "BrightRed" => {
-            return Some(Color::Rgb(255, 0, 0));
+            return Some((Color::Rgb(255, 0, 0), false));
         },
         "White" => {
-            return Some(Color::White);
+            return Some((Color::White, false));
         },
         "BrightWhite" => {
-            return Some(Color::Rgb(255, 255, 255));
+            return Some((Color::Rgb(255, 255, 255), false));
         },
         "Yellow" => {
-            return Some(Color::Yellow);
+            return Some((Color::Yellow, false));
         },
         "BrightYellow" => {
-            return Some(Color::Rgb(255, 235, 42));
+            return Some((Color::Rgb(255, 235, 42), false));
+        },
+        "Rainbow" => {
+            return Some((Color::Black, true))
         },
         &_ => {
             // If not, return Option<> with None

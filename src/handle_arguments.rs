@@ -5,8 +5,9 @@ use crate::{helpers::{reset_terminal_color}, program_colors, structs::{ProgramAr
 
 
 pub fn handle_cli_arguments(program_arguments : ProgramArguments) -> Arc<HandledProgramArguments>{
-    let foreground_color_pointer : Arc<Option<Color>>;
+    let mut foreground_color_pointer : Arc<Option<Color>> = Arc::new(Some(Color::White));
     let background_color_pointer : Arc<Option<Color>>;
+    let mut foreground_color_is_rainbow : Arc<bool> = Arc::new(false);
     let mut max_string_size : Arc<i16> = Arc::new(12);
     let mut min_string_size : Arc<i16> = Arc::new(8);
     let mut matrix_redraw_cooldown : Arc<u64> = Arc::new(40);
@@ -33,7 +34,12 @@ pub fn handle_cli_arguments(program_arguments : ProgramArguments) -> Arc<Handled
         Some(color_as_string) => {
             match program_colors::check_if_color_exists(color_as_string){
                 Some(final_color) => {
-                    foreground_color_pointer = Arc::new(Some(final_color));
+                    if final_color.1 == true{
+                        foreground_color_is_rainbow = Arc::new(true);
+                    }
+                    else{
+                        foreground_color_pointer = Arc::new(Some(final_color.0));
+                    }
                 },
                 None => {
                     program_stdout.set_color(ColorSpec::new().set_fg(Some(Color::Red))).unwrap();
@@ -52,7 +58,15 @@ pub fn handle_cli_arguments(program_arguments : ProgramArguments) -> Arc<Handled
         Some(color_as_string) => {
             match program_colors::check_if_color_exists(color_as_string){
                 Some(final_color) => {
-                    background_color_pointer = Arc::new(Some(final_color));
+                    if final_color.1 == true{
+                        program_stdout.set_color(ColorSpec::new().set_fg(Some(Color::Red))).unwrap();
+                        println!("Unknow background color detected. Try again.");
+                        reset_terminal_color();
+                        exit(1);    
+                    }
+                    else{
+                        background_color_pointer = Arc::new(Some(final_color.0));
+                    }
                 },
                 None => {
                     program_stdout.set_color(ColorSpec::new().set_fg(Some(Color::Red))).unwrap();
@@ -96,6 +110,7 @@ pub fn handle_cli_arguments(program_arguments : ProgramArguments) -> Arc<Handled
     return Arc::new(HandledProgramArguments { max_string_size: max_string_size,
         min_string_size: min_string_size, foreground_color_pointer: foreground_color_pointer,
         background_color_pointer: background_color_pointer,
+        foreground_color_is_rainbow : foreground_color_is_rainbow,
         matrix_redraw_cooldown : matrix_redraw_cooldown, 
         matrix_string_generator_cooldown : matrix_string_generator_cooldown});
 }

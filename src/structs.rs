@@ -13,6 +13,7 @@ pub struct HandledProgramArguments{
     pub min_string_size : Arc<i16>,
     pub foreground_color_pointer : Arc<Option<Color>>,
     pub background_color_pointer : Arc<Option<Color>>,
+    pub foreground_color_is_rainbow : Arc<bool>,
     pub matrix_redraw_cooldown : Arc<u64>,
     pub matrix_string_generator_cooldown : Arc<u64>
 }

@@ -121,7 +121,7 @@ pub fn matrix_renderer(
                 i += 1;
             }
 
-            print_matrix(matrix_locking.clone());
+            print_matrix(matrix_locking.clone(), handled_program_arguments.clone());
 
             drop(matrix_locking);
 
