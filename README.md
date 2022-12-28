@@ -53,6 +53,7 @@ These are the acceptable colors for matrix foreground/background, any color that
     <li>BrightRed</li>
     <li>BrightWhite</li>
     <li>BrightYellow</li>
+    <li>Rainbow (foreground)</li>
 </ul>
 
 ## Matrix string size
